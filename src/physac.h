@@ -263,6 +263,9 @@ PHYSACDEF void ClosePhysics(void);                                              
 
 #elif defined(EMSCRIPTEN)           // Emscripten uses the browser's time functions
     #include <emscripten.h>         // Required for: emscripten_get_now()
+
+#elif defined(ESP32_PLATFORM)
+    #include "esp_timer.h"
 #endif
 
 //----------------------------------------------------------------------------------
@@ -445,8 +448,8 @@ PHYSACDEF PhysicsBody CreatePhysicsBodyRectangle(Vector2 pos, float width, float
         newBody->id = newId;
         newBody->enabled = true;
         newBody->position = pos;
-        newBody->velocity = (Vector2){ 0.0f };
-        newBody->force = (Vector2){ 0.0f };
+        newBody->velocity = (Vector2){ 0.0f, 0.0f };
+        newBody->force = (Vector2){ 0.0f, 0.0f };
         newBody->angularVelocity = 0.0f;
         newBody->torque = 0.0f;
         newBody->orient = 0.0f;
@@ -2009,6 +2012,10 @@ static void InitTimer(void)
       frequency = 1000;
     #endif
 
+    #if defined(ESP32_PLATFORM)
+      frequency = CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ * 1000 *1000;
+    #endif
+
     baseTime = GetTimeCount();      // Get MONOTONIC clock time offset
     startTime = GetCurrTime();   // Get current time
 }
@@ -2036,13 +2043,17 @@ static uint64_t GetTimeCount(void)
       value = emscripten_get_now();
     #endif
 
+    #if defined(ESP32_PLATFORM)
+      value = esp_timer_get_time();
+    #endif
+
     return value;
 }
 
 // Get current time in milliseconds
 static double GetCurrTime(void)
 {
-    return (double)(GetTimeCount() - baseTime)/frequency*1000;
+    return (double)(GetTimeCount() - baseTime)/1000;
 }
 
 // Returns the cross product of a vector and a value

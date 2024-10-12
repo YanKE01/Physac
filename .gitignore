@@ -87,3 +87,13 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# ESP32
+build/
+sdkconfig
+managed_components/
+*.lock
+dist/
+
+#Vscoe
+.vscode/

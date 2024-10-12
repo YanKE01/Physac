@@ -1,0 +1,6 @@
+version: "0.0.2"
+description: Physac support for ESP32 platforms
+url: https://github.com/YanKE01/Physac
+dependencies:
+  idf: ">=4.0"
+  cmake_utilities: "0.*"
