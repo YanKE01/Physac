@@ -1,6 +1,6 @@
 # ChangeLog
 
-## v0.0.4 - 2024-11-5
+## v0.0.5 - 2024-11-5
 * Update release version
 
 ## v0.0.3 - 2024-11-5
