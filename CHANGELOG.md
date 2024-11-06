@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.1.0 - 2024-11-6
+## Enhancements:
+* Update version
+
 ## v0.0.3 - 2024-11-5
 ### Enhancements:
 * Physac:
