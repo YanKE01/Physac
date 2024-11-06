@@ -1,4 +1,4 @@
-version: "0.0.3"
+version: "0.0.4"
 description: Physac support for ESP32 platforms
 url: https://github.com/YanKE01/Physac
 dependencies:
